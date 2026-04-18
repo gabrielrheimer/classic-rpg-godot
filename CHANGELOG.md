@@ -1,6 +1,7 @@
 # Changelog
 
 ### 2026-04-18
+- feat: randomically fill map with walls for playtesting
 - feat: adds and draws player node
 - feat: adds outline to map tiles
 - feat: adds camera hardcoded to viewport center

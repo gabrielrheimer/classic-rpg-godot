@@ -1,5 +1,7 @@
 extends Node2D
 
+const MapFiller = preload("res://scripts/map_filler.gd")
+
 enum TileType { FLOOR, WALL }
 
 const MAP_WIDTH = 50
@@ -14,3 +16,5 @@ func _ready() -> void:
 			var is_border = row == 0 or row == MAP_HEIGHT - 1 or col == 0 or col == MAP_WIDTH - 1
 			row_data.append(TileType.WALL if is_border else TileType.FLOOR)
 		grid.append(row_data)
+
+	MapFiller.fill(grid, MAP_WIDTH, MAP_HEIGHT)
