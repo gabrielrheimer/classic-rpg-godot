@@ -3,6 +3,7 @@ extends Node2D
 const TILE_SIZE = 32
 const COLOR_WALL = Color(0.5, 0.5, 0.5)
 const COLOR_FLOOR = Color(0.2, 0.5, 0.2)
+const COLOR_GRID_OUTLINE = Color(0, 0, 0, 0.3)
 
 const VIEW_RADIUS_X = 12
 const VIEW_RADIUS_Y = 8
@@ -30,3 +31,4 @@ func _draw() -> void:
 			var draw_x = (col - col_start) * TILE_SIZE
 			var draw_y = (row - row_start) * TILE_SIZE
 			draw_rect(Rect2(draw_x, draw_y, TILE_SIZE, TILE_SIZE), color)
+			draw_rect(Rect2(draw_x, draw_y, TILE_SIZE, TILE_SIZE), COLOR_GRID_OUTLINE, false)

@@ -1,6 +1,7 @@
 # Changelog
 
 ### 2026-04-18
+- feat: adds outline to map tiles
 - feat: adds camera hardcoded to viewport center
 - feat: renders map based on view distance from center
 - feat: adds procedural drawing of map
