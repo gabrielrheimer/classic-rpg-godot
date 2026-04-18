@@ -11,7 +11,7 @@ script = ExtResource("1_gamemap")
 script = ExtResource("2_renderer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(400, 272)
+position = Vector2(272, 208)
 
 [node name="Player" type="Node2D" parent="."]
 script = ExtResource("3_player")

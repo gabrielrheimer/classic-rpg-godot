@@ -5,8 +5,8 @@ const COLOR_WALL = Color(0.5, 0.5, 0.5)
 const COLOR_FLOOR = Color(0.2, 0.5, 0.2)
 const COLOR_GRID_OUTLINE = Color(0, 0, 0, 0.3)
 
-const VIEW_RADIUS_X = 12
-const VIEW_RADIUS_Y = 8
+const VIEW_RADIUS_X = 8
+const VIEW_RADIUS_Y = 6
 
 var visual_center: Vector2
 
