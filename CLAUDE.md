@@ -15,7 +15,6 @@ For a record of completed features and changes, see [CHANGELOG.md](CHANGELOG.md)
 - Keep each step small and focused: one concept at a time (e.g., visible map before adding game logic to it).
 - Never bundle too many topics into a single step — the user is learning Godot and prefers incremental progress.
 - Keep this file up to date as the project evolves — update design, conventions, and any new collaboration preferences as they are established.
-- After each implemented feature, update CHANGELOG.md — add a bullet under **Implemented** and a dated entry under **Changelog**.
 
 ## Code Conventions
 - Language: GDScript
