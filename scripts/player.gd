@@ -12,18 +12,18 @@ func _ready() -> void:
 	tile_pos = Vector2i(game_map.MAP_WIDTH / 2, game_map.MAP_HEIGHT / 2)
 	get_parent().get_node("MapRenderer").visual_center = Vector2(tile_pos)
 
-func _input(event: InputEvent) -> void:
+func _process(_delta: float) -> void:
 	if is_moving:
 		return
 
 	var direction := Vector2i.ZERO
-	if event.is_action_pressed("move_right"):
+	if Input.is_action_pressed("move_right"):
 		direction = Vector2i(1, 0)
-	elif event.is_action_pressed("move_left"):
+	elif Input.is_action_pressed("move_left"):
 		direction = Vector2i(-1, 0)
-	elif event.is_action_pressed("move_down"):
+	elif Input.is_action_pressed("move_down"):
 		direction = Vector2i(0, 1)
-	elif event.is_action_pressed("move_up"):
+	elif Input.is_action_pressed("move_up"):
 		direction = Vector2i(0, -1)
 	else:
 		return

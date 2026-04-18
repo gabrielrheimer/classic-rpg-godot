@@ -1,6 +1,7 @@
 # Changelog
 
 ### 2026-04-18
+- feat: allow continuous movement
 - fix: slide map smoothly while in movement
 - feat: move player on WASD and arrow key presses
 - feat: list walkable tile types
