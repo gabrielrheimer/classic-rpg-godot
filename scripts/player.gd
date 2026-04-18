@@ -39,10 +39,8 @@ func _input(event: InputEvent) -> void:
 	var map_renderer = get_parent().get_node("MapRenderer")
 	var tween = create_tween()
 	tween.tween_property(map_renderer, "visual_center", Vector2(tile_pos), MOVE_DURATION)
-	tween.tween_callback(func():
-		is_moving = false
-		map_renderer.queue_redraw()
-	)
+	tween.parallel().tween_method(func(_v): map_renderer.queue_redraw(), 0.0, 1.0, MOVE_DURATION)
+	tween.tween_callback(func(): is_moving = false)
 
 func _draw() -> void:
 	var map_renderer = get_parent().get_node("MapRenderer")
