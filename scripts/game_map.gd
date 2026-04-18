@@ -2,8 +2,6 @@ extends Node2D
 
 const MapFiller = preload("res://scripts/map_filler.gd")
 
-enum TileType { FLOOR, WALL }
-
 const MAP_WIDTH = 50
 const MAP_HEIGHT = 50
 
@@ -14,10 +12,10 @@ func _ready() -> void:
 		var row_data: Array = []
 		for col in range(MAP_WIDTH):
 			var is_border = row == 0 or row == MAP_HEIGHT - 1 or col == 0 or col == MAP_WIDTH - 1
-			row_data.append(TileType.WALL if is_border else TileType.FLOOR)
+			row_data.append(Enums.TileType.WALL if is_border else Enums.TileType.FLOOR)
 		grid.append(row_data)
 
 	MapFiller.fill(grid, MAP_WIDTH, MAP_HEIGHT)
 
 func is_walkable(tile) -> bool:
-	return tile == TileType.FLOOR
+	return tile == Enums.TileType.FLOOR

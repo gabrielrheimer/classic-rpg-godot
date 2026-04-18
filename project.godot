@@ -8,6 +8,10 @@
 
 config_version=5
 
+[autoload]
+
+Enums="*res://scripts/enums.gd"
+
 [application]
 
 config/name="classic-rpg"

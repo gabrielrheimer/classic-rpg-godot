@@ -32,7 +32,7 @@ func _draw() -> void:
 	for row in range(row_start, row_end + 1):
 		for col in range(col_start, col_end + 1):
 			var tile = game_map.grid[row][col]
-			var color = COLOR_WALL if tile == game_map.TileType.WALL else COLOR_FLOOR
+			var color = COLOR_WALL if tile == Enums.TileType.WALL else COLOR_FLOOR
 			var draw_x = (col - visual_center.x + VIEW_RADIUS_X) * TILE_SIZE
 			var draw_y = (row - visual_center.y + VIEW_RADIUS_Y) * TILE_SIZE
 			draw_rect(Rect2(draw_x, draw_y, TILE_SIZE, TILE_SIZE), color)

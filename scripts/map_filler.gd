@@ -19,4 +19,4 @@ static func fill(grid: Array, map_width: int, map_height: int) -> void:
 				break
 			if abs(c - center.x) <= SPAWN_BUFFER and abs(r - center.y) <= SPAWN_BUFFER:
 				continue
-			grid[r][c] = 1
+			grid[r][c] = Enums.TileType.WALL
