@@ -8,3 +8,6 @@ script = ExtResource("1_gamemap")
 
 [node name="MapRenderer" type="Node2D" parent="."]
 script = ExtResource("2_renderer")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(400, 272)
