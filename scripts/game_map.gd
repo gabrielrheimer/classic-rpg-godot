@@ -18,3 +18,6 @@ func _ready() -> void:
 		grid.append(row_data)
 
 	MapFiller.fill(grid, MAP_WIDTH, MAP_HEIGHT)
+
+func is_walkable(tile) -> bool:
+	return tile == TileType.FLOOR
