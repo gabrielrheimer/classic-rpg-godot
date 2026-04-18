@@ -1,6 +1,7 @@
 # Changelog
 
 ### 2026-04-18
+- feat: move player on WASD and arrow key presses
 - feat: list walkable tile types
 - feat: map WASD and arrow key movement inputs
 - feat: randomically fill map with walls for playtesting
