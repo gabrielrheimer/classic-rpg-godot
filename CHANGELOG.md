@@ -1,5 +1,8 @@
 # Changelog
 
+### 2026-04-19
+- feat: create placeholder tile pngs
+
 ### 2026-04-18
 - feat: reduce viewport/camera size
 - feat: allow continuous movement
