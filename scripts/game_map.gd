@@ -1,21 +1,23 @@
 extends Node2D
 
-const MapFiller = preload("res://scripts/map_filler.gd")
+var grid: Dictionary = {}  # Vector2i -> Enums.TileType
+var _tilemap: TileMapLayer
 
-const MAP_WIDTH = 50
-const MAP_HEIGHT = 50
-
-var grid: Array = []
+const STRING_TO_TILE_TYPE = {
+	"floor": Enums.TileType.FLOOR,
+	"wall":  Enums.TileType.WALL,
+	"water": Enums.TileType.WATER,
+}
 
 func _ready() -> void:
-	for row in range(MAP_HEIGHT):
-		var row_data: Array = []
-		for col in range(MAP_WIDTH):
-			var is_border = row == 0 or row == MAP_HEIGHT - 1 or col == 0 or col == MAP_WIDTH - 1
-			row_data.append(Enums.TileType.WALL if is_border else Enums.TileType.FLOOR)
-		grid.append(row_data)
+	_tilemap = $TileMapLayer
+	for cell in _tilemap.get_used_cells():
+		var tile_data = _tilemap.get_cell_tile_data(cell)
+		var type_str = tile_data.get_custom_data("tile_type")
+		grid[cell] = STRING_TO_TILE_TYPE.get(type_str, Enums.TileType.FLOOR)
 
-	MapFiller.fill(grid, MAP_WIDTH, MAP_HEIGHT)
-
-func is_walkable(tile) -> bool:
-	return tile == Enums.TileType.FLOOR
+func is_walkable(tile_pos: Vector2i) -> bool:
+	var tile_data = _tilemap.get_cell_tile_data(tile_pos)
+	if tile_data == null:
+		return false
+	return tile_data.get_custom_data("walkable")

@@ -1,3 +1,3 @@
 extends Node
 
-enum TileType { FLOOR, WALL }
+enum TileType { FLOOR, WALL, WATER }

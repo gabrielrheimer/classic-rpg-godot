@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=4 uid="uid://cga02kyipqqgq"]
+[gd_scene load_steps=4 format=4 uid="uid://cga02kyipqqgq"]
 
 [ext_resource type="Script" uid="uid://belswghvk34m1" path="res://scripts/game_map.gd" id="1_gamemap"]
 [ext_resource type="TileSet" uid="uid://dmyg2q7d71hv1" path="res://assets/tiles/tile_set.tres" id="2_lp764"]
-[ext_resource type="Script" uid="uid://bqj7y67lowyqc" path="res://scripts/map_renderer.gd" id="2_renderer"]
 [ext_resource type="Script" uid="uid://s7svlo7tvqwf" path="res://scripts/player.gd" id="3_player"]
 
 [node name="GameMap" type="Node2D"]
@@ -13,7 +12,6 @@ tile_map_data = PackedByteArray("AAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAIAAAAAAAA
 tile_set = ExtResource("2_lp764")
 
 [node name="MapRenderer" type="Node2D" parent="."]
-script = ExtResource("2_renderer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(272, 208)
