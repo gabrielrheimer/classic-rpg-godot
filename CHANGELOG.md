@@ -1,6 +1,7 @@
 # Changelog
 
 ### 2026-04-19
+- feat: draw initial map sketch
 - feat: create placeholder tile pngs
 
 ### 2026-04-18
