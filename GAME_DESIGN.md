@@ -6,7 +6,7 @@
 
 ## Concept — World RPG
 
-A top-down grid RPG with a handcrafted world, clear beginning and end. Inspired by Tibia's mechanics and WoW's class/lore identity.
+A top-down grid RPG with a handcrafted world, clear beginning and end. Inspired by Tibia's mechanics.
 
 ### World
 - A dangerous and unexplored continent

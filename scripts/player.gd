@@ -3,6 +3,7 @@ extends Node2D
 const TILE_SIZE = 32
 const MOVE_DURATION = 0.3
 
+var stats := CharacterStats.new()
 var tile_pos: Vector2i
 var is_moving: bool = false
 
