@@ -1,12 +1,14 @@
 extends Node2D
 
+const TILE_SIZE = 32
 const MOVE_DURATION = 0.3
 
 var tile_pos: Vector2i
 var is_moving: bool = false
 
 func _ready() -> void:
-	tile_pos = Vector2i(1, 1)
+	tile_pos = Vector2i(10, 10)
+	position = Vector2(tile_pos) * TILE_SIZE
 
 func _process(_delta: float) -> void:
 	if is_moving:
@@ -33,4 +35,5 @@ func _process(_delta: float) -> void:
 	is_moving = true
 
 	var tween = create_tween()
+	tween.tween_property(self, "position", Vector2(tile_pos) * TILE_SIZE, MOVE_DURATION)
 	tween.tween_callback(func(): is_moving = false)

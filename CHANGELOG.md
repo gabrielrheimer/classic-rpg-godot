@@ -1,5 +1,8 @@
 # Changelog
 
+### 2026-04-20
+- feat: make camera follow player
+
 ### 2026-04-19
 - feat: draw initial map sketch
 - feat: create placeholder tile pngs
