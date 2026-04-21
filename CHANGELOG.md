@@ -1,6 +1,7 @@
 # Changelog
 
 ### 2026-04-21
+- feat: add two new spawn points
 - feat: implement turn-based combat
 - feat: allow console-based attack and retaliation
 - feat: add spawn point and basic enemy entity
