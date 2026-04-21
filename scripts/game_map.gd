@@ -24,3 +24,13 @@ func is_walkable(tile_pos: Vector2i) -> bool:
 	if tile_data == null:
 		return false
 	return tile_data.get_custom_data("walkable")
+
+func run_enemy_turns(player: Node2D) -> void:
+	for enemy in occupied_tiles.values():
+		enemy.take_turn(player)
+
+func is_in_combat() -> bool:
+	for enemy in occupied_tiles.values():
+		if enemy.aggroed:
+			return true
+	return false

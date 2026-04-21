@@ -36,12 +36,16 @@ A top-down grid RPG with a handcrafted world, clear beginning and end. Inspired 
 - Fixed spawn points on the map
 - Enemies roam around their spawn point
 - Enemies respawn over time
-- Aggro range — idle until player is close, then chase
-- Pursuit is persistent — aggroed enemies don't give up easily
+- **Aggro system:** enemies have an `aggroed` state; the player is considered in combat if any enemy is aggroed
+  - **Aggressive** — aggros on sight (proximity); pursues and attacks; most common type
+  - **Retaliating** — roams passively until attacked, then fights back
+  - **Fleeing** — roams passively until attacked, then runs away
+- Once aggroed, enemies pursue persistently
 - Some enemies have ranged attacks, forcing the player to engage or find a path around
 - No grinding prevention for now
 - **Nuisance enemies** (rats, snakes, small corrupted animals) — low HP, low damage, trivial alone but dangerous in groups; exist near the city outskirts for early XP farming
 - Enemies also have combat skills that influence their hit chance and damage
+- **Movement:** continuous while out of combat; turn-based when any enemy is aggroed
 
 ### Death
 - On death: teleport back to the city
