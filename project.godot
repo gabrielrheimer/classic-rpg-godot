@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Enums="*res://scripts/enums.gd"
 Constants="*res://scripts/constants.gd"
+Combat="*res://scripts/combat.gd"
 
 [display]
 
