@@ -1,5 +1,8 @@
 # Changelog
 
+### 2026-04-21
+- feat: add combat skills to stats
+
 ### 2026-04-20
 - feat: add player stats resource
 - feat: make camera follow player
