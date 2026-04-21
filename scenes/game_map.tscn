@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=4 uid="uid://cga02kyipqqgq"]
+[gd_scene load_steps=7 format=4 uid="uid://cga02kyipqqgq"]
 
 [ext_resource type="Script" uid="uid://belswghvk34m1" path="res://scripts/game_map.gd" id="1_gamemap"]
 [ext_resource type="TileSet" uid="uid://dmyg2q7d71hv1" path="res://assets/tiles/tile_set.tres" id="2_lp764"]
 [ext_resource type="Script" uid="uid://s7svlo7tvqwf" path="res://scripts/player.gd" id="3_player"]
 [ext_resource type="Texture2D" uid="uid://btucy82f8mihg" path="res://assets/tiles/player.png" id="4_lp764"]
+[ext_resource type="PackedScene" path="res://scenes/enemy.tscn" id="5_enemy"]
+[ext_resource type="PackedScene" path="res://scenes/spawn_point.tscn" id="6_spawnpoint"]
 
 [node name="GameMap" type="Node2D"]
 script = ExtResource("1_gamemap")
@@ -21,3 +23,7 @@ position = Vector2(16, 16)
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 position = Vector2(16, 16)
 texture = ExtResource("4_lp764")
+
+[node name="SpawnPoint" parent="." instance=ExtResource("6_spawnpoint")]
+position = Vector2(480, 320)
+enemy_scene = ExtResource("5_enemy")

@@ -1,6 +1,7 @@
 extends Node2D
 
 var grid: Dictionary = {}  # Vector2i -> Enums.TileType
+var occupied_tiles: Dictionary = {}  # Vector2i -> Enemy
 var _tilemap: TileMapLayer
 
 const STRING_TO_TILE_TYPE = {
@@ -17,6 +18,8 @@ func _ready() -> void:
 		grid[cell] = STRING_TO_TILE_TYPE.get(type_str, Enums.TileType.FLOOR)
 
 func is_walkable(tile_pos: Vector2i) -> bool:
+	if occupied_tiles.has(tile_pos):
+		return false
 	var tile_data = _tilemap.get_cell_tile_data(tile_pos)
 	if tile_data == null:
 		return false

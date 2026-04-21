@@ -1,6 +1,7 @@
 # Changelog
 
 ### 2026-04-21
+- feat: add spawn point and basic enemy entity
 - feat: add combat skills to stats
 
 ### 2026-04-20
