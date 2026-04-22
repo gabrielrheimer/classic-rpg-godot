@@ -1,0 +1,312 @@
+[gd_scene load_steps=15 format=3 uid="uid://07p13fpy6f4h"]
+
+[ext_resource type="Script" uid="uid://crt0x2s2oh8m3" path="res://scripts/ui/main.gd" id="1_main"]
+[ext_resource type="PackedScene" uid="uid://cga02kyipqqgq" path="res://scenes/game_map.tscn" id="2_gamemap"]
+[ext_resource type="Script" uid="uid://ewfxpiqjp060" path="res://scripts/ui/hud.gd" id="3_hud"]
+
+[sub_resource type="StyleBoxFlat" id="hp_fill"]
+bg_color = Color(0.8, 0.1, 0.1, 1)
+
+[sub_resource type="StyleBoxFlat" id="hp_bg"]
+bg_color = Color(0.3, 0.05, 0.05, 1)
+
+[sub_resource type="StyleBoxFlat" id="xp_fill"]
+bg_color = Color(0.5, 0.1, 0.8, 1)
+
+[sub_resource type="StyleBoxFlat" id="xp_bg"]
+bg_color = Color(0.15, 0.15, 0.15, 1)
+
+[sub_resource type="StyleBoxFlat" id="melee_fill"]
+bg_color = Color(0.1, 0.6, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="melee_bg"]
+bg_color = Color(0.15, 0.15, 0.15, 1)
+
+[sub_resource type="StyleBoxFlat" id="ranged_fill"]
+bg_color = Color(0.1, 0.6, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="ranged_bg"]
+bg_color = Color(0.15, 0.15, 0.15, 1)
+
+[sub_resource type="StyleBoxFlat" id="magic_fill"]
+bg_color = Color(0.1, 0.6, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="magic_bg"]
+bg_color = Color(0.15, 0.15, 0.15, 1)
+
+[sub_resource type="StyleBoxFlat" id="hud_panel"]
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_left = 0
+corner_radius_bottom_right = 0
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_main")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 352.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+disable_3d = true
+handle_input_locally = false
+size = Vector2i(480, 352)
+render_target_update_mode = 4
+
+[node name="GameMap" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_gamemap")]
+
+[node name="HUD" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 480.0
+offset_right = 560.0
+offset_bottom = 352.0
+theme_override_styles/panel = SubResource("hud_panel")
+script = ExtResource("3_hud")
+
+[node name="VBox" type="VBoxContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = 12.0
+offset_top = 8.0
+offset_right = -12.0
+offset_bottom = -12.0
+
+[node name="StatsTitle" type="Label" parent="HUD/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Stats"
+horizontal_alignment = 0
+
+[node name="LevelLabel" type="Label" parent="HUD/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 6
+text = "Level: 1"
+horizontal_alignment = 0
+
+[node name="XPBar" type="ProgressBar" parent="HUD/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+show_percentage = false
+theme_override_styles/fill = SubResource("xp_fill")
+theme_override_styles/background = SubResource("xp_bg")
+
+[node name="XPLabel" type="Label" parent="HUD/VBox/XPBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 6
+text = "EXP: 0%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HPBar" type="ProgressBar" parent="HUD/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+max_value = 10.0
+value = 10.0
+show_percentage = false
+theme_override_styles/fill = SubResource("hp_fill")
+theme_override_styles/background = SubResource("hp_bg")
+
+[node name="HPLabel" type="Label" parent="HUD/VBox/HPBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 6
+text = "HP: 10 / 10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MeleeBar" type="ProgressBar" parent="HUD/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+max_value = 100.0
+show_percentage = false
+theme_override_styles/fill = SubResource("melee_fill")
+theme_override_styles/background = SubResource("melee_bg")
+
+[node name="MeleeLabel" type="Label" parent="HUD/VBox/MeleeBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 6
+text = "Melee: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RangedBar" type="ProgressBar" parent="HUD/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+max_value = 100.0
+show_percentage = false
+theme_override_styles/fill = SubResource("ranged_fill")
+theme_override_styles/background = SubResource("ranged_bg")
+
+[node name="RangedLabel" type="Label" parent="HUD/VBox/RangedBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 6
+text = "Ranged: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MagicBar" type="ProgressBar" parent="HUD/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+max_value = 100.0
+show_percentage = false
+theme_override_styles/fill = SubResource("magic_fill")
+theme_override_styles/background = SubResource("magic_bg")
+
+[node name="MagicLabel" type="Label" parent="HUD/VBox/MagicBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 6
+text = "Magic: 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EquipTitle" type="Label" parent="HUD/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Equipment"
+horizontal_alignment = 0
+
+[node name="EquipGrid" type="GridContainer" parent="HUD/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 3
+
+[node name="Slot0" type="Panel" parent="HUD/VBox/EquipGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Slot1" type="Panel" parent="HUD/VBox/EquipGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Slot2" type="Panel" parent="HUD/VBox/EquipGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Slot3" type="Panel" parent="HUD/VBox/EquipGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Slot4" type="Panel" parent="HUD/VBox/EquipGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Slot5" type="Panel" parent="HUD/VBox/EquipGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Slot6" type="Panel" parent="HUD/VBox/EquipGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Slot7" type="Panel" parent="HUD/VBox/EquipGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="AbilitiesTitle" type="Label" parent="HUD/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Abilities"
+horizontal_alignment = 0
+
+[node name="AbilityGrid" type="GridContainer" parent="HUD/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 3
+
+[node name="Ability0" type="Panel" parent="HUD/VBox/AbilityGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Ability1" type="Panel" parent="HUD/VBox/AbilityGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Ability2" type="Panel" parent="HUD/VBox/AbilityGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Ability3" type="Panel" parent="HUD/VBox/AbilityGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="ItemsTitle" type="Label" parent="HUD/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Items"
+horizontal_alignment = 0
+
+[node name="ItemGrid" type="GridContainer" parent="HUD/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 3
+
+[node name="Item0" type="Panel" parent="HUD/VBox/ItemGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Item1" type="Panel" parent="HUD/VBox/ItemGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Item2" type="Panel" parent="HUD/VBox/ItemGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Item3" type="Panel" parent="HUD/VBox/ItemGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Item4" type="Panel" parent="HUD/VBox/ItemGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Item5" type="Panel" parent="HUD/VBox/ItemGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Item6" type="Panel" parent="HUD/VBox/ItemGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+
+[node name="Item7" type="Panel" parent="HUD/VBox/ItemGrid"]
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2

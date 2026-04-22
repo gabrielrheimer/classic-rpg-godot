@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="classic-rpg"
-run/main_scene="res://scenes/game_map.tscn"
+run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -23,8 +23,8 @@ Combat="*res://scripts/combat/combat.gd"
 
 [display]
 
-window/size/viewport_width=544
-window/size/viewport_height=416
+window/size/viewport_width=560
+window/size/viewport_height=352
 window/size/mode=2
 window/stretch/mode="canvas_items"
 

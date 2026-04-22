@@ -1,6 +1,7 @@
 # Changelog
 
 ### 2026-04-21
+- feat: implement hud as a sidebar in 4:3 ratio
 - feat: add progress values for skill stats
 - feat: larger playtest map
 - feat: add two new spawn points

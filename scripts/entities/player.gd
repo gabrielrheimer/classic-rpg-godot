@@ -9,6 +9,7 @@ var is_moving: bool = false
 func _ready() -> void:
 	tile_pos = Vector2i(10, 10)
 	position = Vector2(tile_pos) * Constants.TILE_SIZE
+	get_parent().notify_hud(stats)
 
 func _process(_delta: float) -> void:
 	if is_moving:
@@ -62,3 +63,4 @@ func _input(event: InputEvent) -> void:
 		game_map.occupied_tiles.erase(clicked_tile)
 		enemy.queue_free()
 	game_map.run_enemy_turns(self)
+	get_parent().notify_hud(stats)

@@ -1,5 +1,7 @@
 extends Node2D
 
+signal player_stats_changed(stats: CharacterStats)
+
 var grid: Dictionary = {}  # Vector2i -> Enums.TileType
 var occupied_tiles: Dictionary = {}  # Vector2i -> Enemy
 var _tilemap: TileMapLayer
@@ -34,3 +36,6 @@ func is_in_combat() -> bool:
 		if enemy.aggroed:
 			return true
 	return false
+
+func notify_hud(stats: CharacterStats) -> void:
+	player_stats_changed.emit(stats)
