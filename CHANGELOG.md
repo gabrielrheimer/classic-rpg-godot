@@ -1,6 +1,7 @@
 # Changelog
 
 ### 2026-04-22
+- feat: make enemies roam spawn point in real time
 - feat: enable pathfinding for enemies
 - fix: remake pathfinding logic
 - feat: allow diagonal movement for enemies

@@ -6,13 +6,40 @@ const MOVE_DURATION = 0.3
 enum Behavior { AGGRESSIVE, RETALIATING, FLEEING }
 
 @export var behavior: Behavior = Behavior.RETALIATING
+@export var roam_radius: int = 4
+@export var roam_interval: float = 2.0
+@export var roam_variance: float = 0.3
 var aggroed: bool = false
 var stats := CharacterStats.new()
 var tile_pos: Vector2i
+var home: Vector2i
 
 func _ready() -> void:
 	if behavior == Behavior.AGGRESSIVE:
 		aggroed = true
+	var timer = Timer.new()
+	timer.wait_time = randf_range(roam_interval - roam_variance, roam_interval + roam_variance)
+	timer.autostart = true
+	timer.timeout.connect(_on_roam_timer)
+	add_child(timer)
+
+func _on_roam_timer() -> void:
+	if aggroed:
+		return
+	var game_map = get_parent()
+	if game_map.is_in_combat():
+		return
+	var candidates: Array[Vector2i] = []
+	for dir in [Vector2i(1,0), Vector2i(-1,0), Vector2i(0,1), Vector2i(0,-1)]:
+		var n = tile_pos + dir
+		if not game_map.is_walkable(n):
+			continue
+		if max(abs(n.x - home.x), abs(n.y - home.y)) > roam_radius:
+			continue
+		candidates.append(n)
+	if candidates.is_empty():
+		return
+	_do_move(candidates[randi() % candidates.size()], game_map)
 
 func take_turn(player: Node2D) -> void:
 	if not aggroed:

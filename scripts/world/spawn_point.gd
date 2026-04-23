@@ -13,6 +13,7 @@ func _ready() -> void:
 		return
 	var enemy = scene_to_spawn.instantiate()
 	enemy.tile_pos = Vector2i(int(position.x / Constants.TILE_SIZE), int(position.y / Constants.TILE_SIZE))
+	enemy.home = enemy.tile_pos
 	enemy.position = position
 	var game_map = get_parent()
 	game_map.add_child.call_deferred(enemy)
