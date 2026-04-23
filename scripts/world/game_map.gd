@@ -76,6 +76,12 @@ func is_passable(tile_pos: Vector2i) -> bool:
 		return false
 	return tile_data.get_custom_data("walkable")
 
+func get_path_length(from: Vector2i, to: Vector2i) -> int:
+	var raw: Array = _astar.get_id_path(from, to)
+	if raw.is_empty():
+		return INF
+	return raw.size() - 1
+
 func run_enemy_turns(player: Node2D) -> void:
 	for enemy in occupied_tiles.values():
 		enemy.take_turn(player)

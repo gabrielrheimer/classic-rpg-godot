@@ -1,6 +1,7 @@
 # Changelog
 
 ### 2026-04-23
+- feat: make enemy only aggro if it can reach the player in a reasonable distance
 - feat: add post processing graphics layer
 
 ### 2026-04-22

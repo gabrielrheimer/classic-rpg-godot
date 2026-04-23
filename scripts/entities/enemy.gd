@@ -27,11 +27,14 @@ func _ready() -> void:
 	add_child(timer)
 
 func _on_roam_timer() -> void:
+	if not is_inside_tree():
+		return
 	var game_map = get_parent()
 	var player = game_map.get_node("Player")
 	var dist_to_player = max(abs(player.tile_pos.x - tile_pos.x), abs(player.tile_pos.y - tile_pos.y))
 
-	if behavior == Behavior.AGGRESSIVE and not aggroed and dist_to_player <= sight_radius:
+	var path_len: int = game_map.get_path_length(tile_pos, player.tile_pos)
+	if behavior == Behavior.AGGRESSIVE and not aggroed and dist_to_player <= sight_radius and path_len <= sight_radius * 2:
 		on_attacked()
 		return
 
@@ -62,7 +65,7 @@ func _roam(game_map: Node2D) -> void:
 	_do_move(candidates[randi() % candidates.size()], game_map)
 
 func take_turn(player: Node2D) -> void:
-	if not aggroed:
+	if not aggroed or not is_inside_tree():
 		return
 	if behavior == Behavior.FLEEING:
 		_flee_from(player.tile_pos, get_parent())
