@@ -12,13 +12,13 @@ extends Resource
 @export var magic_skill: int = 1
 @export var magic_xp: int = 0
 @export var level: int = 1
-@export var exp: int = 0
+@export var experience: int = 0
 
 func add_exp(amount: int) -> void:
-	exp += amount
-	if exp >= 100:
+	experience += amount
+	if experience >= 100:
 		level += 1
-		exp -= 100
+		experience -= 100
 
 func add_skill_xp(skill: String, amount: int) -> void:
 	match skill:

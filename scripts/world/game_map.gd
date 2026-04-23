@@ -4,6 +4,7 @@ var grid: Dictionary = {}  # Vector2i -> Enums.TileType
 var occupied_tiles: Dictionary = {}  # Vector2i -> Enemy
 var _tilemap: TileMapLayer
 var _astar := AStar2D.new()
+var _astar_offset := Vector2i.ZERO
 
 const STRING_TO_TILE_TYPE = {
 	"floor": Enums.TileType.FLOOR,
@@ -20,9 +21,18 @@ func _ready() -> void:
 	_build_astar()
 
 func _tile_id(tile: Vector2i) -> int:
-	return tile.x * 10000 + tile.y
+	var t = tile - _astar_offset
+	return t.x * 10000 + t.y
 
 func _build_astar() -> void:
+	var min_x = INF
+	var min_y = INF
+	for tile in grid:
+		if tile.x < min_x:
+			min_x = tile.x
+		if tile.y < min_y:
+			min_y = tile.y
+	_astar_offset = Vector2i(min_x, min_y)
 	for tile in grid:
 		var tile_data = _tilemap.get_cell_tile_data(tile)
 		if tile_data == null or not tile_data.get_custom_data("walkable"):

@@ -1,6 +1,7 @@
 # Changelog
 
 ### 2026-04-22
+- fix: remake pathfinding logic
 - feat: allow diagonal movement for enemies
 - feat: add pathfinding when moving with mouse click
 - feat: add movement via mouse click
