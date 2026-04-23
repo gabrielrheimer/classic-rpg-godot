@@ -9,6 +9,7 @@ enum Behavior { AGGRESSIVE, RETALIATING, FLEEING }
 @export var roam_radius: int = 4
 @export var roam_interval: float = 2.0
 @export var roam_variance: float = 0.3
+@export var sight_radius: int = 4
 var aggroed: bool = false
 var stats := CharacterStats.new()
 var tile_pos: Vector2i
@@ -18,8 +19,6 @@ var call_radius: int = 0
 var roams: bool = true
 
 func _ready() -> void:
-	if behavior == Behavior.AGGRESSIVE:
-		aggroed = true
 	var timer = Timer.new()
 	timer.wait_time = randf_range(roam_interval - roam_variance, roam_interval + roam_variance)
 	timer.autostart = true
@@ -27,11 +26,28 @@ func _ready() -> void:
 	add_child(timer)
 
 func _on_roam_timer() -> void:
-	if not roams or aggroed:
-		return
 	var game_map = get_parent()
-	if game_map.is_in_combat():
+	var player = game_map.get_node("Player")
+	var dist_to_player = max(abs(player.tile_pos.x - tile_pos.x), abs(player.tile_pos.y - tile_pos.y))
+
+	if behavior == Behavior.AGGRESSIVE and not aggroed and dist_to_player <= sight_radius:
+		on_attacked()
 		return
+
+	if behavior == Behavior.FLEEING:
+		if game_map.is_in_combat():
+			return
+		if dist_to_player <= sight_radius:
+			_flee_from(player.tile_pos, game_map)
+		elif roams:
+			_roam(game_map)
+		return
+
+	if not roams or aggroed or game_map.is_in_combat():
+		return
+	_roam(game_map)
+
+func _roam(game_map: Node2D) -> void:
 	var candidates: Array[Vector2i] = []
 	for dir in [Vector2i(1,0), Vector2i(-1,0), Vector2i(0,1), Vector2i(0,-1)]:
 		var n = tile_pos + dir
@@ -48,6 +64,7 @@ func take_turn(player: Node2D) -> void:
 	if not aggroed:
 		return
 	if behavior == Behavior.FLEEING:
+		_flee_from(player.tile_pos, get_parent())
 		return
 	var diff = player.tile_pos - tile_pos
 	var distance = max(abs(diff.x), abs(diff.y))
@@ -58,6 +75,23 @@ func take_turn(player: Node2D) -> void:
 			print("Player died")
 	elif distance > 1:
 		_move_toward(player.tile_pos)
+
+func _flee_from(player_pos: Vector2i, game_map: Node2D) -> void:
+	var best_tile: Vector2i
+	var best_dist: int = -1
+	for dx in [-1, 0, 1]:
+		for dy in [-1, 0, 1]:
+			if dx == 0 and dy == 0:
+				continue
+			var n = tile_pos + Vector2i(dx, dy)
+			if not game_map.is_walkable(n):
+				continue
+			var d = max(abs(n.x - player_pos.x), abs(n.y - player_pos.y))
+			if d > best_dist:
+				best_dist = d
+				best_tile = n
+	if best_dist >= 0:
+		_do_move(best_tile, game_map)
 
 func _move_toward(target: Vector2i) -> void:
 	var game_map = get_parent()

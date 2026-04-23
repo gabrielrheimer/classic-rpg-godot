@@ -7,6 +7,7 @@ extends Node2D
 @export var group_id: String = ""
 @export var call_radius: int = 5
 @export var roams: bool = true
+@export var behavior: Enemy.Behavior = Enemy.Behavior.RETALIATING
 
 func _ready() -> void:
 	var scene_to_spawn = enemy_scene
@@ -20,6 +21,7 @@ func _ready() -> void:
 	enemy.group_id = group_id
 	enemy.call_radius = call_radius
 	enemy.roams = roams
+	enemy.behavior = behavior
 	enemy.position = position
 	var game_map = get_parent()
 	game_map.add_child.call_deferred(enemy)
