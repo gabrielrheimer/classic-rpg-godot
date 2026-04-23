@@ -1,6 +1,7 @@
 # Changelog
 
 ### 2026-04-22
+- feat: make spawns inherit properties from enemies
 - feat: allow selecting between enemy behaviro aggressive, passive and fleeing
 - feat: allow checking spawn points as roaming or idle
 - feat: allow enemies to call for help based on group id and radius

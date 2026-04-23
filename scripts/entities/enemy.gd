@@ -10,12 +10,13 @@ enum Behavior { AGGRESSIVE, RETALIATING, FLEEING }
 @export var roam_interval: float = 2.0
 @export var roam_variance: float = 0.3
 @export var sight_radius: int = 4
+@export var call_radius: int = 5
+
 var aggroed: bool = false
 var stats := CharacterStats.new()
 var tile_pos: Vector2i
 var home: Vector2i
 var group_id: String = ""
-var call_radius: int = 0
 var roams: bool = true
 
 func _ready() -> void:

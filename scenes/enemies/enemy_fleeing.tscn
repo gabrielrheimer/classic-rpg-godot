@@ -1,11 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://ccn1aqw3quu5"]
+[gd_scene load_steps=3 format=3 uid="uid://dfekb61ej6x6y"]
 
 [ext_resource type="Script" uid="uid://bbk05m2kfaknf" path="res://scripts/entities/enemy.gd" id="1_enemy"]
-[ext_resource type="Texture2D" uid="uid://bcwyvpnddal5u" path="res://assets/tiles/enemy_aggressive.png" id="2_md0e3"]
+[ext_resource type="Texture2D" uid="uid://cixuq4xcwad4e" path="res://assets/tiles/enemy_fleeing.png" id="2_enemy"]
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_enemy")
+behavior = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(16, 16)
-texture = ExtResource("2_md0e3")
+texture = ExtResource("2_enemy")

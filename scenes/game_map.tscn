@@ -1,12 +1,14 @@
-[gd_scene load_steps=8 format=4 uid="uid://cga02kyipqqgq"]
+[gd_scene load_steps=10 format=4 uid="uid://cga02kyipqqgq"]
 
 [ext_resource type="Script" uid="uid://dgwn4a4c4gsde" path="res://scripts/world/game_map.gd" id="1_gamemap"]
 [ext_resource type="TileSet" uid="uid://dmyg2q7d71hv1" path="res://assets/tiles/tile_set.tres" id="2_lp764"]
 [ext_resource type="Script" uid="uid://dkdlpsgac04q5" path="res://scripts/entities/player.gd" id="3_player"]
 [ext_resource type="Texture2D" uid="uid://btucy82f8mihg" path="res://assets/tiles/player.png" id="4_lp764"]
-[ext_resource type="PackedScene" path="res://scenes/enemy.tscn" id="5_enemy"]
-[ext_resource type="PackedScene" path="res://scenes/spawn_point.tscn" id="6_spawnpoint"]
+[ext_resource type="PackedScene" uid="uid://h88pilxv8q0l" path="res://scenes/spawn_point.tscn" id="6_spawnpoint"]
 [ext_resource type="Script" uid="uid://gtsq3rxjd4wb" path="res://scripts/world/tile_highlight.gd" id="7_highlight"]
+[ext_resource type="PackedScene" uid="uid://dfekb61ej6x6y" path="res://scenes/enemies/enemy_fleeing.tscn" id="8_cdv0t"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_passive.tscn" id="8_kqil0"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_aggressive.tscn" id="9_cdv0t"]
 
 [node name="GameMap" type="Node2D"]
 script = ExtResource("1_gamemap")
@@ -26,55 +28,50 @@ position = Vector2(16, 16)
 position = Vector2(16, 16)
 texture = ExtResource("4_lp764")
 
-[node name="SpawnPoint" parent="." instance=ExtResource("6_spawnpoint")]
-position = Vector2(448, 352)
-enemy_scene = ExtResource("5_enemy")
-
-[node name="SpawnPoint2" parent="." instance=ExtResource("6_spawnpoint")]
-position = Vector2(512, 288)
-enemy_scene = ExtResource("5_enemy")
-group_id = "orc"
-
-[node name="SpawnPoint3" parent="." instance=ExtResource("6_spawnpoint")]
-position = Vector2(512, 256)
-enemy_scene = ExtResource("5_enemy")
-group_id = "orc"
-
-[node name="SpawnPoint4" parent="." instance=ExtResource("6_spawnpoint")]
-position = Vector2(448, 96)
-enemy_scene = ExtResource("5_enemy")
-roams = false
-
-[node name="SpawnPoint5" parent="." instance=ExtResource("6_spawnpoint")]
-position = Vector2(192, 256)
-enemy_scene = ExtResource("5_enemy")
-behavior = 2
-
-[node name="SpawnPoint6" parent="." instance=ExtResource("6_spawnpoint")]
-position = Vector2(160, 192)
-enemy_scene = ExtResource("5_enemy")
-behavior = 2
-
-[node name="SpawnPoint7" parent="." instance=ExtResource("6_spawnpoint")]
-position = Vector2(736, 640)
-enemy_scene = ExtResource("5_enemy")
-behavior = 0
-
-[node name="SpawnPoint8" parent="." instance=ExtResource("6_spawnpoint")]
-position = Vector2(800, 576)
-enemy_scene = ExtResource("5_enemy")
-behavior = 0
-
-[node name="SpawnPoint9" parent="." instance=ExtResource("6_spawnpoint")]
-position = Vector2(864, 672)
-enemy_scene = ExtResource("5_enemy")
-behavior = 0
-
-[node name="SpawnPoint10" parent="." instance=ExtResource("6_spawnpoint")]
-position = Vector2(416, 576)
-enemy_scene = ExtResource("5_enemy")
-roams = false
-behavior = 0
-
 [node name="TileHighlight" type="Node2D" parent="."]
 script = ExtResource("7_highlight")
+
+[node name="SpawnPoint" parent="." instance=ExtResource("6_spawnpoint")]
+position = Vector2(96, 192)
+enemy_scene = ExtResource("8_cdv0t")
+
+[node name="SpawnPoint2" parent="." instance=ExtResource("6_spawnpoint")]
+position = Vector2(96, 224)
+enemy_scene = ExtResource("8_cdv0t")
+
+[node name="SpawnPoint3" parent="." instance=ExtResource("6_spawnpoint")]
+position = Vector2(448, 96)
+enemy_scene = ExtResource("8_kqil0")
+group_id = "group"
+roams = 2
+
+[node name="SpawnPoint4" parent="." instance=ExtResource("6_spawnpoint")]
+position = Vector2(512, 256)
+enemy_scene = ExtResource("8_kqil0")
+group_id = "group"
+
+[node name="SpawnPoint5" parent="." instance=ExtResource("6_spawnpoint")]
+position = Vector2(480, 256)
+enemy_scene = ExtResource("8_kqil0")
+
+[node name="SpawnPoint6" parent="." instance=ExtResource("6_spawnpoint")]
+position = Vector2(480, 224)
+enemy_scene = ExtResource("8_kqil0")
+group_id = "group"
+
+[node name="SpawnPoint7" parent="." instance=ExtResource("6_spawnpoint")]
+position = Vector2(416, 576)
+enemy_scene = ExtResource("9_cdv0t")
+roams = 2
+
+[node name="SpawnPoint8" parent="." instance=ExtResource("6_spawnpoint")]
+position = Vector2(768, 640)
+enemy_scene = ExtResource("9_cdv0t")
+
+[node name="SpawnPoint9" parent="." instance=ExtResource("6_spawnpoint")]
+position = Vector2(768, 608)
+enemy_scene = ExtResource("9_cdv0t")
+
+[node name="SpawnPoint10" parent="." instance=ExtResource("6_spawnpoint")]
+position = Vector2(736, 608)
+enemy_scene = ExtResource("9_cdv0t")
