@@ -30,11 +30,18 @@ func take_turn(player: Node2D) -> void:
 		_move_toward(player.tile_pos)
 
 func _move_toward(target: Vector2i) -> void:
-	var diff = target - tile_pos
-	var step = Vector2i(sign(diff.x), sign(diff.y))
-	var new_pos = tile_pos + step
 	var game_map = get_parent()
-	if not game_map.is_walkable(new_pos):
+	var exclude: Array[Vector2i] = [tile_pos]
+	var path = game_map.get_tile_path(tile_pos, target, exclude)
+	if path.is_empty():
+		return
+	var next = path[0]
+	if next == target:
+		return  # would land on player tile
+	_do_move(next, game_map)
+
+func _do_move(new_pos: Vector2i, game_map: Node2D) -> void:
+	if not game_map.is_passable(new_pos) or game_map.occupied_tiles.has(new_pos):
 		return
 	game_map.occupied_tiles.erase(tile_pos)
 	tile_pos = new_pos
