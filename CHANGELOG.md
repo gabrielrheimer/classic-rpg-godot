@@ -1,6 +1,7 @@
 # Changelog
 
 ### 2026-04-22
+- feat: allow diagonal movement for enemies
 - feat: add pathfinding when moving with mouse click
 - feat: add movement via mouse click
 - feat: implement passive enemies that pursue when attacked

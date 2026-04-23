@@ -31,11 +31,7 @@ func take_turn(player: Node2D) -> void:
 
 func _move_toward(target: Vector2i) -> void:
 	var diff = target - tile_pos
-	var step: Vector2i
-	if abs(diff.x) >= abs(diff.y):
-		step = Vector2i(sign(diff.x), 0)
-	else:
-		step = Vector2i(0, sign(diff.y))
+	var step = Vector2i(sign(diff.x), sign(diff.y))
 	var new_pos = tile_pos + step
 	var game_map = get_parent()
 	if not game_map.is_walkable(new_pos):
