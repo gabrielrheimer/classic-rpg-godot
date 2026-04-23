@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://cga02kyipqqgq"]
+[gd_scene load_steps=8 format=4 uid="uid://cga02kyipqqgq"]
 
 [ext_resource type="Script" uid="uid://dgwn4a4c4gsde" path="res://scripts/world/game_map.gd" id="1_gamemap"]
 [ext_resource type="TileSet" uid="uid://dmyg2q7d71hv1" path="res://assets/tiles/tile_set.tres" id="2_lp764"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://btucy82f8mihg" path="res://assets/tiles/player.png" id="4_lp764"]
 [ext_resource type="PackedScene" path="res://scenes/enemy.tscn" id="5_enemy"]
 [ext_resource type="PackedScene" path="res://scenes/spawn_point.tscn" id="6_spawnpoint"]
+[ext_resource type="Script" path="res://scripts/world/tile_highlight.gd" id="7_highlight"]
 
 [node name="GameMap" type="Node2D"]
 script = ExtResource("1_gamemap")
@@ -35,3 +36,6 @@ enemy_scene = ExtResource("5_enemy")
 [node name="SpawnPoint3" parent="." instance=ExtResource("6_spawnpoint")]
 position = Vector2(512, 256)
 enemy_scene = ExtResource("5_enemy")
+
+[node name="TileHighlight" type="Node2D" parent="."]
+script = ExtResource("7_highlight")

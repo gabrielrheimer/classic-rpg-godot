@@ -1,6 +1,7 @@
 # Changelog
 
 ### 2026-04-22
+- feat: add movement via mouse click
 - feat: implement passive enemies that pursue when attacked
 
 ### 2026-04-21
