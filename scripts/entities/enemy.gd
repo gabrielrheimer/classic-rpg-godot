@@ -13,6 +13,8 @@ var aggroed: bool = false
 var stats := CharacterStats.new()
 var tile_pos: Vector2i
 var home: Vector2i
+var group_id: String = ""
+var call_radius: int = 0
 
 func _ready() -> void:
 	if behavior == Behavior.AGGRESSIVE:
@@ -77,4 +79,15 @@ func _do_move(new_pos: Vector2i, game_map: Node2D) -> void:
 	tween.tween_property(self, "position", Vector2(tile_pos) * Constants.TILE_SIZE, MOVE_DURATION)
 
 func on_attacked() -> void:
+	if aggroed:
+		return
 	aggroed = true
+	if group_id == "" or call_radius == 0:
+		return
+	var game_map = get_parent()
+	for enemy in game_map.occupied_tiles.values():
+		if enemy == self or enemy.group_id != group_id:
+			continue
+		var dist = max(abs(enemy.tile_pos.x - tile_pos.x), abs(enemy.tile_pos.y - tile_pos.y))
+		if dist <= call_radius:
+			enemy.on_attacked()
