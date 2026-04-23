@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://cga02kyipqqgq"]
+[gd_scene load_steps=12 format=4 uid="uid://cga02kyipqqgq"]
 
 [ext_resource type="Script" uid="uid://dgwn4a4c4gsde" path="res://scripts/world/game_map.gd" id="1_gamemap"]
 [ext_resource type="TileSet" uid="uid://dmyg2q7d71hv1" path="res://assets/tiles/tile_set.tres" id="2_lp764"]
@@ -9,6 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://dfekb61ej6x6y" path="res://scenes/enemies/enemy_fleeing.tscn" id="8_cdv0t"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy_passive.tscn" id="8_kqil0"]
 [ext_resource type="PackedScene" path="res://scenes/enemies/enemy_aggressive.tscn" id="9_cdv0t"]
+[ext_resource type="Shader" uid="uid://dsat8e1klttj6" path="res://shaders/post_process.gdshader" id="10_postprocess"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cave"]
+shader = ExtResource("10_postprocess")
+shader_parameter/candle_radius = 0.32
+shader_parameter/aspect_ratio = 1.307
+shader_parameter/darkness_floor = 0.15
+shader_parameter/desaturation = 0.55
 
 [node name="GameMap" type="Node2D"]
 script = ExtResource("1_gamemap")
@@ -75,3 +83,13 @@ enemy_scene = ExtResource("9_cdv0t")
 [node name="SpawnPoint10" parent="." instance=ExtResource("6_spawnpoint")]
 position = Vector2(736, 608)
 enemy_scene = ExtResource("9_cdv0t")
+
+[node name="PostProcessLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="PostProcessRect" type="ColorRect" parent="PostProcessLayer"]
+material = SubResource("ShaderMaterial_cave")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2

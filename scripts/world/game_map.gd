@@ -1,9 +1,15 @@
 extends Node2D
 
+enum LightingMode { CAVE, OUTDOOR }
+
 var grid: Dictionary = {}  # Vector2i -> Enums.TileType
 var occupied_tiles: Dictionary = {}  # Vector2i -> Enemy
 var _tilemap: TileMapLayer
 var _astar := AStarGrid2D.new()
+
+@onready var _post_process_rect := $PostProcessLayer/PostProcessRect
+@onready var _mat_cave: ShaderMaterial = _post_process_rect.material
+var _mat_outdoor := preload("res://materials/outdoor_lighting.tres")
 
 const STRING_TO_TILE_TYPE = {
 	"floor": Enums.TileType.FLOOR,
@@ -18,6 +24,14 @@ func _ready() -> void:
 		var type_str = tile_data.get_custom_data("tile_type")
 		grid[cell] = STRING_TO_TILE_TYPE.get(type_str, Enums.TileType.FLOOR)
 	_build_astar()
+	set_lighting(LightingMode.OUTDOOR)
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and event.keycode == KEY_N:
+		if _post_process_rect.material == _mat_cave:
+			set_lighting(LightingMode.OUTDOOR)
+		else:
+			set_lighting(LightingMode.CAVE)
 
 func _build_astar() -> void:
 	var min_x = INF
@@ -71,3 +85,10 @@ func is_in_combat() -> bool:
 		if enemy.aggroed:
 			return true
 	return false
+
+func set_lighting(mode: LightingMode) -> void:
+	match mode:
+		LightingMode.CAVE:
+			_post_process_rect.material = _mat_cave
+		LightingMode.OUTDOOR:
+			_post_process_rect.material = _mat_outdoor

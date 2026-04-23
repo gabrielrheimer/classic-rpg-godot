@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://k5ewmf1coc7c"]
+
+[ext_resource type="Shader" uid="uid://dsat8e1klttj6" path="res://shaders/post_process.gdshader" id="1"]
+
+[resource]
+shader = ExtResource("1")
+shader_parameter/candle_radius = 0.54
+shader_parameter/aspect_ratio = 1.307
+shader_parameter/darkness_floor = 0.72
+shader_parameter/desaturation = 0.2
