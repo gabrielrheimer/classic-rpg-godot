@@ -1,5 +1,8 @@
 # Changelog
 
+### 2026-04-22
+- feat: implement passive enemies that pursue when attacked
+
 ### 2026-04-21
 - feat: add progress values for skill stats
 - feat: larger playtest map
