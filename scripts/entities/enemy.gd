@@ -15,6 +15,7 @@ var tile_pos: Vector2i
 var home: Vector2i
 var group_id: String = ""
 var call_radius: int = 0
+var roams: bool = true
 
 func _ready() -> void:
 	if behavior == Behavior.AGGRESSIVE:
@@ -26,7 +27,7 @@ func _ready() -> void:
 	add_child(timer)
 
 func _on_roam_timer() -> void:
-	if aggroed:
+	if not roams or aggroed:
 		return
 	var game_map = get_parent()
 	if game_map.is_in_combat():

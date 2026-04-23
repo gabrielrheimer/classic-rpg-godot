@@ -1,6 +1,7 @@
 # Changelog
 
 ### 2026-04-22
+- feat: allow checking spawn points as roaming or idle
 - feat: allow enemies to call for help based on group id and radius
 - feat: make enemies roam spawn point in real time
 - feat: enable pathfinding for enemies
